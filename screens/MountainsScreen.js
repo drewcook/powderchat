@@ -1,16 +1,15 @@
 import React from 'react';
-import { Button, Text, View } from 'react-native';
+import { Button, ScrollView, View } from 'react-native';
+import MountainList from '../components/Mountains';
 
 
 
 export default function MountainsScreen({ navigation }) {
   return (
     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Text>Mountains screen</Text>
-      <Button
-        title="Go to Details"
-        onPress={() => navigation.navigate('Details')}
-      />
+      <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
+        <MountainList navigation={navigation} />
+      </ScrollView>
     </View>
   );
 }

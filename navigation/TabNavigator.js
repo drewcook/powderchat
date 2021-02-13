@@ -7,6 +7,7 @@ import { Text, View } from 'react-native';
 import TabBarIcon from '../components/TabBarIcon';
 import HomeScreen from '../screens/HomeScreen';
 import MountainsScreen from '../screens/MountainsScreen';
+import MountainDetailsScreen from '../screens/MountainDetails';
 import ChatsScreen from '../screens/ChatsScreen';
 import SettingsScreen from '../screens/SettingsScreen';
 
@@ -36,7 +37,7 @@ function MountainsStackScreen() {
   return (
     <MountainsStack.Navigator>
       <MountainsStack.Screen name="Mountains" component={MountainsScreen} />
-      <MountainsStack.Screen name="Details" component={DetailsScreen} />
+      <MountainsStack.Screen name="Mountain Details" component={MountainDetailsScreen} />
     </MountainsStack.Navigator>
   );
 }
