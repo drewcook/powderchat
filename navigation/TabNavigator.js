@@ -2,7 +2,7 @@ import * as React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { Platform, Button, Text, View } from 'react-native';
+import { Text, View } from 'react-native';
 
 import TabBarIcon from '../components/TabBarIcon';
 import HomeScreen from '../screens/HomeScreen';
@@ -76,7 +76,7 @@ const TabNavigator = () => (
           tabBarIcon: ({ focused }) => (
             <TabBarIcon
               focused={focused}
-              name={Platform.OS === 'ios' ? `ios-information-circle${focused ? '' : '-outline'}` : 'md-information-circle'}
+              name={`information-circle${focused ? '' : '-outline'}`}
             />
           ),
         }}
@@ -89,7 +89,9 @@ const TabNavigator = () => (
           tabBarIcon: ({ focused }) => (
             <TabBarIcon
               focused={focused}
-              name={Platform.OS === 'ios' ? 'ios-snow' : 'md-snow'}
+              name="mountain"
+              set="fa"
+              size={20}
             />
           ),
         }}
@@ -102,7 +104,7 @@ const TabNavigator = () => (
           tabBarIcon: ({ focused }) => (
             <TabBarIcon
               focused={focused}
-              name={Platform.OS === 'ios' ? 'ios-chatbubbles' : 'md-chatbubbles'}
+              name="chatbubbles"
             />
           ),
         }}
@@ -115,7 +117,7 @@ const TabNavigator = () => (
           tabBarIcon: ({ focused }) => (
             <TabBarIcon
               focused={focused}
-              name={Platform.OS === 'ios' ? 'ios-options' : 'md-options'}
+              name='options'
             />
           ),
         }}
