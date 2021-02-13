@@ -1,0 +1,12 @@
+{
+  "name": "powder-chat",
+  "displayName": "powder-chat",
+  "expo": {
+    "name": "powder-chat",
+    "slug": "powder-chat",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}
