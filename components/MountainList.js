@@ -3,12 +3,13 @@ import {
 	FlatList,
 	Image,
 	StyleSheet,
+	Platform,
 	Text,
 	TouchableOpacity,
 	View,
 } from 'react-native';
 // import LoadingIcon from "../components/LoadingIcon";
-// import Icon from '../components/Icon';
+import { Ionicons } from '@expo/vector-icons';
 // import * as MountainActions from "../store/actions/mountainsActions";
 // import { bindActionCreators, compose } from "redux";
 // import { connect } from "react-redux";
@@ -63,14 +64,14 @@ const MountainList = (props) => {
 					onPress={() => navigation.navigate('Mountain Details', { id: item.item.id })}
 				>
 					<View style={styles.mountainContainer}>
-						<Image source={{ uri: `somehost/somwhere/${item.item.logo}` }} style={styles.mountainImg} />
+						<Image source={require(`../assets/images/mountains/${item.item.logo}`)} style={styles.mountainImg} />
 						<Text style={styles.mountainTitle}>
 							{item.item.name}
 						</Text>
-						{/* <Icon
+						<Ionicons
 							name={Platform.OS === "ios" ? "ios-arrow-forward" : "md-arrow-forward"}
 							style={styles.mountainArrow}
-						/> */}
+						/>
 					</View>
 				</TouchableOpacity>
 			)}

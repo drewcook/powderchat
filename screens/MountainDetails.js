@@ -23,7 +23,6 @@ const styles = StyleSheet.create({
 	header: {
 		backgroundColor: "#efefef",
 		padding: 20,
-		flex: 0,
 		alignItems: "center",
 		justifyContent: "center",
 		borderBottomWidth: 1,
@@ -62,12 +61,12 @@ const MountainDetailsScreen = (props) => {
 
 	if (!details) return null;
 
-	const logosDir = firebase.storage().ref().child('mountains/logos');
+	// const logosDir = firebase.storage().ref().child('mountains/logos');
 
 	return (
 		<View style={styles.container}>
 			<View style={styles.header}>
-				<Image source={{ uri: `${logosDir}/${details.logo}` }} style={styles.image} />
+				<Image source={require(`../assets/images/mountains/${details.logo}`)} style={styles.image} />
 				<Text style={styles.title}>{details.name}</Text>
 				<Text style={styles.region}>{details.region}</Text>
 			</View>
