@@ -2,14 +2,14 @@ import React from 'react';
 import {
 	FlatList,
 	Image,
-	Platform,
 	StyleSheet,
+	Platform,
 	Text,
 	TouchableOpacity,
 	View,
 } from 'react-native';
 // import LoadingIcon from "../components/LoadingIcon";
-// import Icon from '../components/Icon';
+import { Ionicons } from '@expo/vector-icons';
 // import * as MountainActions from "../store/actions/mountainsActions";
 // import { bindActionCreators, compose } from "redux";
 // import { connect } from "react-redux";
@@ -49,75 +49,29 @@ const styles = StyleSheet.create({
 	}
 });
 
-const MOUNTAINS = [
-	{
-		name: 'Eldora Mountain',
-		region: 'Nederland, CO',
-		iconPath: 'https:/hosting.someurl.com/pixelimages/dfklnalefnalk;fea;lfjae;lfja;lwejf'
-	},
-	{
-		name: 'Wolf Creek',
-		region: 'Pagosa Springs, CO',
-		iconPath: 'https:/hosting.someurl.com/pixelimages/dfklnalefnalk;fea;lfjae;lfja;lwejf'
-	},
-	{
-		name: 'Copper Mountain',
-		region: 'Silverthorns, CO',
-		iconPath: 'https:/hosting.someurl.com/pixelimages/dfklnalefnalk;fea;lfjae;lfja;lwejf'
-	},
-	{
-		name: 'Arapahoe Basin',
-		region: 'Aspen, CO',
-		iconPath: 'https:/hosting.someurl.com/pixelimages/dfklnalefnalk;fea;lfjae;lfja;lwejf'
-	},
-	{
-		name: 'Cook Ski Resort',
-		region: 'Aspen, CO',
-		iconPath: 'https:/hosting.someurl.com/pixelimages/dfklnalefnalk;fea;lfjae;lfja;lwejf'
-	},
-	{
-		name: 'Loveland Resort',
-		region: 'Loveland, CO',
-		iconPath: 'https:/hosting.someurl.com/pixelimages/dfklnalefnalk;fea;lfjae;lfja;lwejf'
-	},
-	{
-		name: 'Vail Resort',
-		region: 'Vail, CO',
-		iconPath: 'https:/hosting.someurl.com/pixelimages/dfklnalefnalk;fea;lfjae;lfja;lwejf'
-	},
-	{
-		name: 'Purgatory',
-		region: 'Durango, CO',
-		iconPath: 'https:/hosting.someurl.com/pixelimages/dfklnalefnalk;fea;lfjae;lfja;lwejf'
-	},
-	{
-		name: 'Keystone',
-		region: 'Aspen, CO',
-		iconPath: 'https:/hosting.someurl.com/pixelimages/dfklnalefnalk;fea;lfjae;lfja;lwejf'
-	},
-];
-
 const MountainList = (props) => {
-	const { navigation } = props;
-// useEffect(() => {
-	// props.getMountains();
-// }, [])
+	const { navigation, mountains } = props;
+
+	if (!mountains) return null;
 
 	return (
 		<FlatList
-			data={MOUNTAINS}
+			data={mountains}
 			keyExtractor=  {(item, idx) => idx.toString()}
 			renderItem={(item, idx) => (
-				<TouchableOpacity onPress={() => navigation.navigate('Mountain Details', { name: item.item.name })}>
+				<TouchableOpacity
+					key={item.item.id}
+					onPress={() => navigation.navigate('Mountain Details', { id: item.item.id })}
+				>
 					<View style={styles.mountainContainer}>
-						{/* <Image source={{ uri: "/assets/images/mountains/arapahoe_basin.jpg" }} /> */}
+						<Image source={require(`../assets/images/mountains/${item.item.logo}`)} style={styles.mountainImg} />
 						<Text style={styles.mountainTitle}>
 							{item.item.name}
 						</Text>
-						{/* <Icon
+						<Ionicons
 							name={Platform.OS === "ios" ? "ios-arrow-forward" : "md-arrow-forward"}
 							style={styles.mountainArrow}
-						/> */}
+						/>
 					</View>
 				</TouchableOpacity>
 			)}

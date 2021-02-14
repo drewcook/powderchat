@@ -1,8 +1,9 @@
-import firebase from 'firebase/app';
-import "firebase/firestore";
-import "firebase/auth";
+import * as firebase from 'firebase';
+import 'firebase/firestore';
+import 'firebase/auth';
+import 'firebase/storage';
 
-const firebaseConfig = {
+const config = {
 	apiKey: "AIzaSyBHCu3VF2PsH0lJm9XzTTyKU5wnmRXbNZQ",
 	authDomain: "slopechat.firebaseapp.com",
 	databaseURL: "https://slopechat.firebaseio.com",
@@ -14,10 +15,5 @@ const firebaseConfig = {
 
 // initialize the firebase app
 if (firebase.apps.length === 0) {
-	firebase.initializeApp(firebaseConfig);
+	firebase.initializeApp(config);
 }
-
-
-const fbConfig = firebase;
-
-export default fbConfig;

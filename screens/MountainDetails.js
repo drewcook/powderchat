@@ -1,5 +1,6 @@
-import React from "react";
+import React , { useState, useEffect } from "react";
 import {
+	ActivityIndicator,
 	Image,
 	StyleSheet,
 	Text,
@@ -7,9 +8,12 @@ import {
 } from "react-native";
 // import Button from "../components/Button";
 import colors from "../constants/Colors";
-// import mountainService from "../database/mountainService";
+// import LoadingIcon from '../components/LoadingIcon';
+import mountainService from "../database/mountainService";
+// import { getLogo } from '../database/storageService';
 // import userService from "../database/userService";
 // import FontAwesomeIcon from "../components/FontAwesomeIcon";
+import * as firebase from 'firebase';
 
 const styles = StyleSheet.create({
 	container: {
@@ -19,7 +23,6 @@ const styles = StyleSheet.create({
 	header: {
 		backgroundColor: "#efefef",
 		padding: 20,
-		flex: 0,
 		alignItems: "center",
 		justifyContent: "center",
 		borderBottomWidth: 1,
@@ -49,23 +52,26 @@ const styles = StyleSheet.create({
 });
 
 const MountainDetailsScreen = (props) => {
-	const mountainName = props.route.params.name;
+	const [details, setDetails] = useState(null);
 
-	const mountain = {
-		name: mountainName,
-		region: 'Aspen, CO',
-		iconPath: 'https:/hosting.someurl.com/pixelimages/dfklnalefnalk;fea;lfjae;lfja;lwejf'
-	};
+	useEffect(() => {
+		mountainService.getMountainById(props.route.params.id)
+			.then(setDetails);
+	}, [])
+
+	if (!details) return null;
+
+	// const logosDir = firebase.storage().ref().child('mountains/logos');
 
 	return (
 		<View style={styles.container}>
 			<View style={styles.header}>
-				<Image source={{ uri: mountain.iconPath }} style={styles.image} />
-				<Text style={styles.title}>{mountain.name}</Text>
-				<Text style={styles.region}>{mountain.region}</Text>
+				<Image source={require(`../assets/images/mountains/${details.logo}`)} style={styles.image} />
+				<Text style={styles.title}>{details.name}</Text>
+				<Text style={styles.region}>{details.region}</Text>
 			</View>
 			<View style={styles.body}>
-				<Text>Here is some text about the mountain.  Check in below.</Text>
+				<Text>{`Here is some text about ${details.name}.  Check in below.`}</Text>
 			</View>
 		</View>
 	);
