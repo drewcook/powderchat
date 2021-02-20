@@ -11,7 +11,7 @@ import {
 import { useAuthentication } from '../components/AuthContext';
 import Button from "../components/Button";
 import colors from "../constants/Colors";
-import { loginWithFacebook } from "../database/authService";
+import { loginWithFacebook, loginWithGoogle } from "../database/authService";
 
 const SignInScreen = (props) => {
 	const { navigation } = props;
@@ -68,6 +68,11 @@ const SignInScreen = (props) => {
 						bgColor={colors.primary}
 						title="Login With Facebook"
 						onPress={loginWithFacebook}
+					/>
+					<Button
+						bgColor={colors.primary}
+						title="Login With Google"
+						onPress={loginWithGoogle}
 					/>
 					{/* <Text style={{marginVertical: 40}}></Text> */}
 					{authError && <Text style={styles.errorMsg}>{authError}</Text>}
