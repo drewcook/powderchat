@@ -11,6 +11,7 @@ import AuthLoadingScreen from "./screens/AuthLoadingScreen";
 import SignInScreen from "./screens/SignInScreen";
 import SignUpScreen from "./screens/SignUpScreen";
 import TabNavigator from './navigation/TabNavigator';
+import StartupNavigation from './navigation/StartupNavigation';
 
 const styles = StyleSheet.create({
   container: {
@@ -26,27 +27,13 @@ const StartupStack = createStackNavigator();
 
 const App = (props) => {
   const { user } = props;
-  console.log({user})
 
   return (
     <NavigationContainer>
       {/* <StatusBar style="auto" /> */}
-        <StartupStack.Navigator>
-          {!user.loggedIn ? (
-            <>
-              <StartupStack.Screen name="Auth Loading" component={AuthLoadingScreen} options={{ header: () => null }} />
-              <StartupStack.Screen name="Sign In" component={SignInScreen} options={{ header: () => null }} />
-              <StartupStack.Screen name="Sign Up" component={SignUpScreen} />
-            </>
-          )
-            : (
-              <>
-                <StartupStack.Screen name="Main" component={TabNavigator} options={{ header: () => null }} />
-              </>
-            )
-          }
-        </StartupStack.Navigator>
+      <StartupNavigation loggedIn={user.loggedIn} />
     </NavigationContainer>
   );
 };
+
 export default withAuthProvider()(App);
