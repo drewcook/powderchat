@@ -64,7 +64,8 @@ const MountainList = (props) => {
 					onPress={() => navigation.navigate('Mountain Details', { id: item.item.id })}
 				>
 					<View style={styles.mountainContainer}>
-						<Image source={require(`../assets/images/mountains/${item.item.logo}`)} style={styles.mountainImg} />
+						{/* use item.item.logo */}
+						<Image source={null} style={styles.mountainImg} />
 						<Text style={styles.mountainTitle}>
 							{item.item.name}
 						</Text>
