@@ -6,14 +6,7 @@ import {
 	Text,
 	View,
 } from "react-native";
-// import Button from "../components/Button";
-import colors from "../constants/Colors";
-// import LoadingIcon from '../components/LoadingIcon';
 import mountainService from "../database/mountainService";
-// import { getLogo } from '../database/storageService';
-// import userService from "../database/userService";
-// import FontAwesomeIcon from "../components/FontAwesomeIcon";
-import * as firebase from 'firebase';
 
 const styles = StyleSheet.create({
 	container: {
@@ -52,21 +45,29 @@ const styles = StyleSheet.create({
 });
 
 const MountainDetailsScreen = (props) => {
+	const { route } = props;
+	const [loading, setLoading] = useState(true);
 	const [details, setDetails] = useState(null);
+	let imgSrc = null;
 
 	useEffect(() => {
-		mountainService.getMountainById(props.route.params.id)
-			.then(setDetails);
+		mountainService.getMountainById(route.params.id)
+			.then(setDetails)
+			.catch((e) => console.log(e))
+			.then(() => setLoading(false));
 	}, [])
 
-	if (!details) return null;
-
+	if (loading) return <ActivityIndicator />;
 	// const logosDir = firebase.storage().ref().child('mountains/logos');
+
+	if (details) {
+		// imgSrc = require(`../assets/images/mountains/${details.logo}`);
+	}
 
 	return (
 		<View style={styles.container}>
 			<View style={styles.header}>
-				<Image source={require(`../assets/images/mountains/${details.logo}`)} style={styles.image} />
+				<Image source={null} style={styles.image} />
 				<Text style={styles.title}>{details.name}</Text>
 				<Text style={styles.region}>{details.region}</Text>
 			</View>
