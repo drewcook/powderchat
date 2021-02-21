@@ -7,7 +7,6 @@ import {
 	StyleSheet,
 	View,
 } from "react-native";
-import {ImagePicker, Permissions} from "expo";
 import Button from "../components/Button";
 import colors from "../constants/Colors";
 import firebase from 'firebase/app';
@@ -16,28 +15,7 @@ const SignUpScreen = () => {
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
 	const [username, setUsername] = useState('');
-	const [photo, setPhoto] = useState(null);
 	const [authError, setAuthError] = useState(null);
-
-	const handlePickImage = async () => {
-		const { status, permissions } = await Permissions.askAsync(Permissions.CAMERA_ROLL);
-		console.log(permissions);
-		if (status === "granted") {
-			let result = await ImagePicker.launchImageLibraryAsync({
-				allowsEditing: true,
-				aspect: [1, 1],
-			});
-
-			console.log(result);
-
-			if (!result.cancelled) {
-				setPhoto(result.uri);
-			}
-		} else {
-			throw new Error('Camera permission not granted');
-		}
-	};
-
 	const handleCreateAccount = () => {
 		firebase
 			.auth()
@@ -58,8 +36,9 @@ const SignUpScreen = () => {
 	return (
 		<ImageBackground source={require('../assets/images/auth_bg2.jpg')} style={styles.bgImg}>
 			<View style={styles.container}>
-				<Text style={styles.text}>It's easy to sign up! Just use a valid email address with a unique
-					password and you'll be ready to go. We'd also need a name and optional photo to display for other riders.</Text>
+				<Text style={styles.text}>
+					It's easy to sign up! Just use a valid email address with a unique password and you'll be ready to go.
+				</Text>
 				<View style={styles.fieldContainer}>
 					<TextInput
 						style={styles.textField}
@@ -83,18 +62,6 @@ const SignUpScreen = () => {
 						onChangeText={setUsername}
 						value={username}
 						placeholder="Name"
-					/>
-				</View>
-				<View style={styles.fieldContainerImage}>
-					<Button
-						bgColor={colors.primary}
-						title="Choose Photo"
-						onPress={handlePickImage}
-						btnStyle={{flexGrow: 1}}
-					/>
-					<Image
-						source={photo ? {uri: photo} : require("../assets/images/default_user.png")}
-						style={styles.signUpPhoto}
 					/>
 				</View>
 				{authError && <Text style={styles.errorMsg}>{authError}</Text>}
@@ -126,13 +93,6 @@ const styles = StyleSheet.create({
 	fieldContainer: {
 		marginVertical: 10,
 		alignSelf: "stretch",
-	},
-	fieldContainerImage: {
-		marginTop: 10,
-		marginBottom: 50,
-		flexDirection: "row",
-		alignItems: "center",
-		justifyContent: "space-between",
 	},
 	label: {
 		marginBottom: 5,
