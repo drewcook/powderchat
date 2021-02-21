@@ -78,8 +78,8 @@ const SignInScreen = (props) => {
 					{authError && <Text style={styles.errorMsg}>{authError}</Text>}
 					<TouchableOpacity onPress={() => navigation.navigate("Sign Up")}>
 						<Text style={styles.signUpText}>
-							Don't have an account?
-							<Text style={{textDecorationLine: "underline"}}>Sign up here</Text>.
+							Don't have an account?&nbsp;
+							<Text style={{ textDecorationLine: "underline" }}>Sign up here</Text>.
 						</Text>
 					</TouchableOpacity>
 					<Button

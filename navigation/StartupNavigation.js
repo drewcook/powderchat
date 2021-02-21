@@ -11,7 +11,6 @@ const StartupStack = createStackNavigator();
 const StartupNavigation = (props) => {
   const { loggedIn } = props;
 
-  console.log({loggedIn})
   return (
     <StartupStack.Navigator initialRouteName="Auth Loading">
       {!loggedIn ? (
