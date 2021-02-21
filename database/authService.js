@@ -19,8 +19,11 @@ export const loginWithGoogle = async () => {
 };
 
 export const loginWithFacebook = async () => {
+	// await Facebook.initializeAzync('566780290461704'); // FACEBOOK_APP_ID
 	var provider = new firebase.auth.FacebookAuthProvider();
 	provider.addScope('user_birthday');
+	// provider.addScope('public_profile');
+	// provider.addScope('user_friends');
 
 	return await firebase.auth().signInWithPopup(provider)
 		.then((result) => {
@@ -34,27 +37,3 @@ export const loginWithFacebook = async () => {
 			// handle error
 		});
 };
-
-// export const loginWithFacebook = async () => {
-// 	await Facebook.initializeAzync('566780290461704'); // FACEBOOK_APP_ID
-
-// 	const {type, token} = await Facebook.logInWithReadPermissionsAsync({
-// 		permissions: [
-// 			'public_profile',
-// 			//'user_friends', <-- needs App Review from Facebook to use
-// 		]
-// 	});
-
-// 	if (type === 'success') {
-// 		// Build Firebase credential with the Facebook access token.
-// 		const credential = firebase.auth.FacebookAuthProvider.credential(token);
-
-// 		// Sign in with credential from the Facebook user.
-// 		firebase
-// 			.auth()
-// 			.signInWithCredential(credential)
-// 			.catch((error) => {
-// 				// Handle Errors here.
-// 			});
-// 	}
-// }
